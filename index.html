@@ -1,0 +1,539 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alvatrox - TikToker & Gamer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Orbitron', monospace;
+            background: 
+                linear-gradient(45deg, #064e3b 0%, #065f46 15%, #047857 30%, #059669 45%, #10b981 60%, #34d399 75%, #6ee7b7 90%, #a7f3d0 100%),
+                radial-gradient(circle at 20% 10%, rgba(16, 185, 129, 0.4) 0%, transparent 40%),
+                radial-gradient(circle at 80% 20%, rgba(52, 211, 153, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(110, 231, 183, 0.2) 0%, transparent 60%);
+            background-size: 400% 400%, 100% 100%, 100% 100%, 100% 100%;
+            animation: gradientShift 8s ease infinite;
+            min-height: 100vh;
+            color: #ffffff;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 15% 25%, rgba(74, 222, 128, 0.15) 0%, transparent 45%),
+                radial-gradient(circle at 85% 75%, rgba(52, 211, 153, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 50% 10%, rgba(110, 231, 183, 0.08) 0%, transparent 55%),
+                radial-gradient(circle at 70% 60%, rgba(16, 185, 129, 0.1) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: -1;
+            animation: floatingLights 12s ease-in-out infinite;
+        }
+        
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(135deg, transparent 0%, rgba(6, 78, 59, 0.1) 25%, transparent 50%, rgba(16, 185, 129, 0.05) 75%, transparent 100%);
+            pointer-events: none;
+            z-index: -1;
+            animation: wave 15s linear infinite;
+        }
+        
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .profile-section {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 25px;
+            margin: 0 auto 20px;
+            background: 
+                linear-gradient(45deg, #10b981, #34d399, #6ee7b7, #a7f3d0, #34d399, #10b981),
+                radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3) 0%, transparent 70%);
+            background-size: 400% 400%, 100% 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid rgba(255,255,255,0.3);
+            position: relative;
+            overflow: hidden;
+            animation: profilePulse 3s ease-in-out infinite, gradientRotate 6s linear infinite;
+            box-shadow: 
+                0 0 30px rgba(16, 185, 129, 0.4),
+                inset 0 0 20px rgba(255,255,255,0.1);
+        }
+        
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 21px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .profile-image .placeholder-text {
+            font-size: 48px;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7), 0 0 20px rgba(16, 185, 129, 0.5);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .profile-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent, rgba(74, 222, 128, 0.1), transparent);
+            animation: diamondShine 4s linear infinite;
+        }
+        
+        .profile-image::after {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            width: 80%;
+            height: 80%;
+            border-radius: 15px;
+            background: radial-gradient(circle at 25% 25%, rgba(255,255,255,0.2) 0%, transparent 50%);
+            animation: innerGlow 2s ease-in-out infinite alternate;
+        }
+        
+        .username {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #10b981, #34d399, #6ee7b7, #a7f3d0, #d1fae5, #a7f3d0, #6ee7b7, #34d399, #10b981);
+            background-size: 400% 400%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGradient 4s ease infinite, textFloat 3s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(74, 222, 128, 0.8);
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .username::before {
+            content: 'ALVATROX';
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: linear-gradient(45deg, #10b981, #34d399, #6ee7b7);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: blur(3px);
+            opacity: 0.7;
+            z-index: -1;
+            animation: glowPulse 2s ease-in-out infinite;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            color: #a3e635;
+            font-weight: 400;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .bio {
+            font-size: 0.95rem;
+            color: #d1fae5;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: 
+                linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(6, 78, 59, 0.2) 50%, rgba(0,0,0,0.3) 100%),
+                radial-gradient(circle at 30% 70%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+            border-radius: 20px;
+            border: 2px solid rgba(74, 222, 128, 0.4);
+            backdrop-filter: blur(15px);
+            position: relative;
+            box-shadow: 
+                0 10px 30px rgba(0,0,0,0.2),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+            animation: bioFloat 4s ease-in-out infinite;
+        }
+        
+        .bio::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #10b981, #34d399, #6ee7b7, #a7f3d0, #6ee7b7, #34d399, #10b981);
+            background-size: 400% 400%;
+            border-radius: 22px;
+            z-index: -1;
+            animation: borderGlow 6s linear infinite;
+            opacity: 0.6;
+        }
+        
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            padding: 18px 25px;
+            background: 
+                linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(6, 78, 59, 0.3) 50%, rgba(0,0,0,0.4) 100%),
+                radial-gradient(circle at 20% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+            border-radius: 20px;
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 2px solid rgba(74, 222, 128, 0.3);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(15px);
+            box-shadow: 
+                0 8px 32px rgba(0,0,0,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+            transform-style: preserve-3d;
+        }
+        
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent, rgba(255,255,255,0.15), rgba(74, 222, 128, 0.1), rgba(255,255,255,0.15), transparent);
+            transition: left 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .social-link::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(74, 222, 128, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+        
+        .social-link:hover::before {
+            left: 100%;
+        }
+        
+        .social-link:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-8px) scale(1.03) rotateX(5deg);
+            border-color: rgba(74, 222, 128, 0.7);
+            box-shadow: 
+                0 25px 50px rgba(74, 222, 128, 0.3),
+                0 0 30px rgba(74, 222, 128, 0.2),
+                inset 0 1px 0 rgba(255,255,255,0.2);
+            text-shadow: 0 0 15px rgba(255,255,255,0.5);
+        }
+        
+        .social-link:active {
+            transform: translateY(-4px) scale(0.98) rotateX(2deg);
+        }
+        
+        .tiktok-link {
+            background: linear-gradient(135deg, rgba(255, 0, 80, 0.2), rgba(0, 0, 0, 0.3));
+            border-color: rgba(255, 0, 80, 0.3);
+        }
+        
+        .tiktok-link:hover {
+            border-color: rgba(255, 0, 80, 0.6);
+            box-shadow: 0 20px 40px rgba(255, 0, 80, 0.2);
+        }
+        
+        .youtube-link {
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.2), rgba(0, 0, 0, 0.3));
+            border-color: rgba(255, 0, 0, 0.3);
+        }
+        
+        .youtube-link:hover {
+            border-color: rgba(255, 0, 0, 0.6);
+            box-shadow: 0 20px 40px rgba(255, 0, 0, 0.2);
+        }
+        
+        .kick-link {
+            background: linear-gradient(135deg, rgba(83, 255, 26, 0.2), rgba(0, 0, 0, 0.3));
+            border-color: rgba(83, 255, 26, 0.3);
+        }
+        
+        .kick-link:hover {
+            border-color: rgba(83, 255, 26, 0.6);
+            box-shadow: 0 20px 40px rgba(83, 255, 26, 0.2);
+        }
+        
+        .discord-link {
+            background: linear-gradient(135deg, rgba(114, 137, 218, 0.2), rgba(0, 0, 0, 0.3));
+            border-color: rgba(114, 137, 218, 0.3);
+        }
+        
+        .discord-link:hover {
+            border-color: rgba(114, 137, 218, 0.6);
+            box-shadow: 0 20px 40px rgba(114, 137, 218, 0.2);
+        }
+        
+        .icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+            width: 30px;
+            text-align: center;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid rgba(74, 222, 128, 0.3);
+            color: #a3e635;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%, 0% 0%, 0% 0%, 0% 0%; }
+            25% { background-position: 50% 25%, 25% 25%, 25% 25%, 25% 25%; }
+            50% { background-position: 100% 50%, 50% 50%, 50% 50%, 50% 50%; }
+            75% { background-position: 50% 75%, 75% 75%, 75% 75%, 75% 75%; }
+            100% { background-position: 0% 50%, 0% 0%, 0% 0%, 0% 0%; }
+        }
+        
+        @keyframes floatingLights {
+            0%, 100% { 
+                background: 
+                    radial-gradient(circle at 15% 25%, rgba(74, 222, 128, 0.15) 0%, transparent 45%),
+                    radial-gradient(circle at 85% 75%, rgba(52, 211, 153, 0.12) 0%, transparent 50%),
+                    radial-gradient(circle at 50% 10%, rgba(110, 231, 183, 0.08) 0%, transparent 55%),
+                    radial-gradient(circle at 70% 60%, rgba(16, 185, 129, 0.1) 0%, transparent 40%);
+            }
+            25% { 
+                background: 
+                    radial-gradient(circle at 25% 15%, rgba(74, 222, 128, 0.18) 0%, transparent 45%),
+                    radial-gradient(circle at 75% 85%, rgba(52, 211, 153, 0.15) 0%, transparent 50%),
+                    radial-gradient(circle at 40% 20%, rgba(110, 231, 183, 0.1) 0%, transparent 55%),
+                    radial-gradient(circle at 80% 50%, rgba(16, 185, 129, 0.12) 0%, transparent 40%);
+            }
+            50% { 
+                background: 
+                    radial-gradient(circle at 35% 35%, rgba(74, 222, 128, 0.12) 0%, transparent 45%),
+                    radial-gradient(circle at 65% 65%, rgba(52, 211, 153, 0.18) 0%, transparent 50%),
+                    radial-gradient(circle at 60% 30%, rgba(110, 231, 183, 0.12) 0%, transparent 55%),
+                    radial-gradient(circle at 90% 40%, rgba(16, 185, 129, 0.08) 0%, transparent 40%);
+            }
+            75% { 
+                background: 
+                    radial-gradient(circle at 45% 45%, rgba(74, 222, 128, 0.1) 0%, transparent 45%),
+                    radial-gradient(circle at 55% 55%, rgba(52, 211, 153, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 40%, rgba(110, 231, 183, 0.15) 0%, transparent 55%),
+                    radial-gradient(circle at 20% 30%, rgba(16, 185, 129, 0.15) 0%, transparent 40%);
+            }
+        }
+        
+        @keyframes wave {
+            0% { transform: translateX(-100%) rotate(0deg); }
+            100% { transform: translateX(100%) rotate(360deg); }
+        }
+        
+        @keyframes profilePulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.05) rotate(1deg); }
+            50% { transform: scale(1.02) rotate(0deg); }
+            75% { transform: scale(1.08) rotate(-1deg); }
+        }
+        
+        @keyframes gradientRotate {
+            0% { background-position: 0% 50%, 50% 50%; }
+            25% { background-position: 100% 50%, 25% 25%; }
+            50% { background-position: 200% 50%, 75% 75%; }
+            75% { background-position: 300% 50%, 25% 75%; }
+            100% { background-position: 400% 50%, 50% 50%; }
+        }
+        
+        @keyframes diamondShine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            25% { transform: translateX(-50%) translateY(-50%) rotate(135deg); }
+            50% { transform: translateX(0%) translateY(0%) rotate(225deg); }
+            75% { transform: translateX(50%) translateY(50%) rotate(315deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(405deg); }
+        }
+        
+        @keyframes innerGlow {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            100% { opacity: 0.6; transform: scale(1.1); }
+        }
+        
+        @keyframes textGradient {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 100% 25%; }
+            50% { background-position: 200% 50%; }
+            75% { background-position: 300% 75%; }
+            100% { background-position: 400% 50%; }
+        }
+        
+        @keyframes textFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-3px) rotate(0.5deg); }
+            50% { transform: translateY(-1px) rotate(0deg); }
+            75% { transform: translateY(-2px) rotate(-0.5deg); }
+        }
+        
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.5; filter: blur(4px); }
+            50% { opacity: 0.8; filter: blur(2px); }
+        }
+        
+        @keyframes bioFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-2px) rotate(0.3deg); }
+            66% { transform: translateY(1px) rotate(-0.3deg); }
+        }
+        
+        @keyframes borderGlow {
+            0% { background-position: 0% 50%; opacity: 0.4; }
+            25% { background-position: 100% 25%; opacity: 0.7; }
+            50% { background-position: 200% 50%; opacity: 0.5; }
+            75% { background-position: 300% 75%; opacity: 0.8; }
+            100% { background-position: 400% 50%; opacity: 0.4; }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .username {
+                font-size: 2rem;
+            }
+            
+            .social-link {
+                padding: 16px 20px;
+                font-size: 1rem;
+            }
+            
+            .profile-image {
+                width: 100px;
+                height: 100px;
+                font-size: 40px;
+            }
+        }
+        
+        @media (max-width: 320px) {
+            .username {
+                font-size: 1.8rem;
+            }
+            
+            .social-link {
+                padding: 14px 18px;
+                font-size: 0.95rem;
+            }
+            
+            .icon {
+                font-size: 1.3rem;
+                margin-right: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="profile-section">
+                <div class="profile-image">
+             
+                    <img src="Alvatrox.jpeg" alt="Alvatrox Profile" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <span class="placeholder-text" style="display: none;">A</span>
+                </div>
+                <h1 class="username">ALVATROX</h1>
+                <p class="subtitle">🎮 Minecraft Content Creator 🎮</p>
+                <div class="bio">
+                    ¡Hola! Soy Alvatrox, creador de contenido de Minecraft. Aquí encontrarás aventuras épicas, builds increíbles y mucha diversión. ¡Sígueme en todas mis redes sociales!
+                </div>
+            </div>
+        </div>
+        
+        <div class="links-container">
+            <a href="https://www.tiktok.com/@alvatroxrial?is_from_webapp=1&sender_device=pc" class="social-link tiktok-link">
+                <span class="icon">🎵</span>
+                <span>TikTok - @alvatrox</span>
+            </a>
+            
+            <a href="https://www.youtube.com/@alvatroxreal" class="social-link youtube-link">
+                <span class="icon">📺</span>
+                <span>YouTube - Alvatrox</span>
+            </a>
+            
+            <a href="https://kick.com/alvatroxrial" class="social-link kick-link">
+                <span class="icon">🔴</span>
+                <span>Kick - Alvatrox</span>
+            </a>
+            
+            <a href="https://discord.gg/tjGqc8VK" class="social-link discord-link">
+                <span class="icon">💬</span>
+                <span>Discord - Únete al servidor</span>
+            </a>
+        </div>
+        
+        <div class="footer">
+            <p>⚡ Powered by Minecraft Magic ⚡</p>
+            <p>© 2025 Alvatrox - Todos los derechos reservados</p>
+        </div>
+    </div>
+</body>
+</html>
